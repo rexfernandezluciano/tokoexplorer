@@ -1,0 +1,136 @@
+/** @format */
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+body {
+  font-family: Ubuntu;
+  background-color: #f1f1f1;
+  background: #f1f1f1;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #007ead !important;
+  border-color: #007ead !important;
+  color: #fff !important;
+}
+
+.btn-outline-primary {
+  border-color: #007ead !important;
+  color: #007ead !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #006c96 !important;
+  border-color: #006c96 !important;
+  -webkit-background-clip: #007ead;
+  background-clip: #007ead;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background-color: #007ead;
+  border-color: #007ead !important;
+  color: #fff !important;
+}
+
+/* Backgrounds */
+.bg-primary {
+  background-color: #007ead !important;
+  color: #fff !important;
+}
+
+/* Text */
+.text-primary {
+  color: #007ead !important;
+  -webkit-text-fill-color: #007ead !important;
+}
+
+/* Borders */
+.border-primary {
+  border-color: #007ead !important;
+}
+
+/* Alerts */
+.alert-primary {
+  background-color: #007ead !important;
+  border-color: #007ead !important;
+  color: #fff !important;
+}
+
+/* Badges */
+.badge-primary,
+.bg-primary.badge {
+  background-color: #007ead !important;
+  color: #fff !important;
+}
+
+/* Pagination */
+.page-link {
+  color: #007ead;
+}
+
+.page-item.active .page-link {
+  background-color: #007ead;
+  border-color: #007ead;
+}
+
+/* List group */
+.list-group-item-primary {
+  background-color: #007ead;
+  color: #fff;
+}
+
+/* Navbar (if using .bg-primary) */
+.navbar.bg-primary {
+  background-color: #007ead !important;
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+  color: #007ead !important;
+  -webkit-text-fill-color: #007ead;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+.bal {
+  font-size: 2rem;
+}
+
+.navbar .active {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  background: #007ead;
+  background-color: #007ead;
+  border-radius: 12px;
+}
+
+.link-primary {
+  color: #007ead;
+  -webkit-text-fill-color: #007ead;
+}
+
+.header-row {
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.list-item {
+  transition: background-color 0.2s;
+}
+
+.list-item:hover {
+  background-color: #f8f9fa;
+}
+
+.list-content {
+  max-height: 500px;
+  overflow-y: auto;
+}

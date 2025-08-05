@@ -1,0 +1,44 @@
+.list-container {
+  display: flex;
+  flex-direction: column; /* Stack header and content */
+}
+
+.list-header {
+  display: flex;
+  /* justify-content: space-between;  Distribute items evenly */
+}
+
+.list-content {
+  /* Add padding or margins as needed */
+}
+
+.list-item {
+  display: flex;
+  flex-direction: column; /* Stack on mobile */
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Style for larger screens (desktop) */
+@media (min-width: 768px) { /* Adjust breakpoint as needed */
+  .list-item {
+    flex-direction: row; /* Row layout on desktop */
+    align-items: center; /* Vertically center items */
+  }
+
+  .list-header > div {
+    /* Add styles for header items here */
+    text-align: left;
+  }
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
