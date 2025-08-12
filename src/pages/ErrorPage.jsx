@@ -5,15 +5,14 @@ import { HouseDoor, ExclamationTriangle, ArrowCounterclockwise, QuestionCircle }
 
 import Layout from "../components/Layout";
 import Header from "../components/Header";
-import Navigation from "../components/Navigation";
+import Navigation from "../components/navs/Navigation";
 import Paragraph from "../components/Paragraph";
 
-export default function ErrorPage() {
+const ErrorPage = () => {
 	const navigate = useNavigate();
 	const error = useRouteError();
 	const isDev = process.env.NODE_ENV === "development";
 
-	// Determine error type
 	const getErrorDetails = () => {
 		if (error?.status === 404) {
 			return {
@@ -111,3 +110,5 @@ export default function ErrorPage() {
 		</>
 	);
 }
+
+export default ErrorPage;

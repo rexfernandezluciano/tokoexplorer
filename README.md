@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+<!-- @format -->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Toko Explorer
 
-## Available Scripts
+A block explorer for TokoChain, built with React.js.
 
-In the project directory, you can run:
+This project aims to provide a user-friendly interface for exploring the TokoChain blockchain. We welcome contributions from the community to help improve and
+expand its functionality.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Clone the repository:**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   ```bash
+   git clone https://github.com/rexfernandezluciano/tokoexplorer.git
+   cd tokoexplorer
+   ```
 
-### `npm test`
+2. **Install Dependencies:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. **Start the Development Server:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   This will start the application and open it in your browser at `http://localhost:3000`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Prerequisites
 
-### `npm run eject`
+- **Node.js:** Version 22 or higher. You can download it from [https://nodejs.org/](https://nodejs.org/).
+- **npm:** (Usually included with Node.js)
+- **React.js:** Version 19.1 or higher. This will be installed as a dependency when you run `npm install`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Contributing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+We encourage contributions to Toko Explorer! Here's how you can help:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Report Bugs:** If you find a bug, please create a new issue on GitHub with a clear description of the problem and steps to reproduce it.
+- **Suggest Enhancements:** Have an idea for a new feature or improvement? Create a new issue to discuss it.
+- **Submit Pull Requests:** If you've fixed a bug or implemented a new feature, submit a pull request. Please follow these guidelines:
+  - **Branching:** Create a new branch for your changes, based on the `main` branch. Use a descriptive name for your branch (e.g., `fix-typo`,
+    `add-transaction-filtering`).
+  - **Code Style:** Follow the existing code style. Consider using a linter and formatter to ensure consistency.
+  - **Testing:** Write unit tests for your changes whenever possible.
+  - **Commit Messages:** Write clear and concise commit messages.
+  - **Pull Request Description:** Provide a detailed description of your changes in the pull request. Explain the problem you're solving or the feature you're
+    adding.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Project Structure
 
-## Learn More
+Understanding the project structure can help you navigate the codebase and contribute more effectively. Here's a brief overview:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `src/`: Contains the main source code for the application.
+  - `client/`: Base API Client.
+  - `config/`: App configurations (e.g. firebase).
+  - `contents/`: Static assets files.
+  - `components/`: Reusable React components.
+  - `pages/`: React components representing different pages of the application (e.g., home page, block details page, transaction details page).
+  - `router/`: Code for interacting with the TokoChain blockchain (e.g., fetching block data, transaction data).
+  - `utils/`: Utility functions.
+- `index.js`: Main application file.
+- `RootLayout.jsx`: Base App Layout.
+- `public/`: Contains static assets, such as images and the `index.html` file.
+- `package.json`: Contains project metadata and dependencies.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Further Development
 
-### Code Splitting
+Here are some potential areas for future development:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Transaction Filtering:** Allow users to filter transactions by address, type, or other criteria.
+- **Address Details Page:** Create a page to display detailed information about a specific address, including its balance and transaction history.
+- **Real-time Updates:** Implement real-time updates using WebSockets to display new blocks and transactions as they are added to the blockchain.
+- **Improved Search Functionality:** Enhance the search functionality to allow users to search for blocks, transactions, and addresses more easily.
+- **Mobile Responsiveness:** Ensure that the application is responsive and works well on mobile devices.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+We look forward to your contributions!

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Toko Explorer",
+  "name": "Toko Block Explorer",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +10,35 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "description": "Explore the Toko blockchain with ease.",
+  "categories": ["blockchain", "explorer", "cryptocurrency"],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "640x480",
+      "type": "image/png",
+      "label": "Transaction Details"
+    },
+    {
+      "src": "screenshot2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Block Information"
+    }
+  ],
+  "prefer_related_applications": false
 }

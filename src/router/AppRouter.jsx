@@ -1,39 +1,62 @@
 /** @format */
 
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
 
-import MetricsLoader from "../router/loader/MetricsLoader";
-import BlockLoader from "../router/loader/BlockLoader";
+import HomePageLoader from "../router/loader/HomePageLoader";
+import ViewBlockPageLoader from "../router/loader/ViewBlockPageLoader";
 
 const RootLayout = lazy(() => import("../RootLayout.jsx"));
 const HomePage = lazy(() => import("../pages/HomePage.jsx"));
-const LoadingPage = lazy(() => import("../pages/LoadingPage.jsx"));
+const AboutPage = lazy(() => import("../pages/AboutPage.jsx"));
+const LoadingView = lazy(() => import("../components/loaders/LoadingView.jsx"));
+const SplashView = lazy(() => import("../components/loaders/SplashView.jsx"));
 const ErrorPage = lazy(() => import("../pages/ErrorPage.jsx"));
 const ViewBlockPage = lazy(() => import("../pages/ViewBlockPage.jsx"));
 
-const AppRouter = createBrowserRouter([
+const router = createBrowserRouter([
 	{
 		path: "/",
 		element: (
-			<Suspense fallback={<LoadingPage />}>
+			<Suspense fallback={<LoadingView />}>
 				<RootLayout />
 			</Suspense>
 		),
 		errorElement: <ErrorPage />,
+		hydrateFallbackElement: <SplashView />,
 		children: [
 			{
 				index: true,
-				element: <HomePage />,
-				loader: MetricsLoader,
+				element: (
+					<Suspense fallback={<LoadingView />}>
+						<HomePage />
+					</Suspense>
+				),
+				loader: HomePageLoader,
 			},
 			{
 				path: "block/:id",
-				element: <ViewBlockPage />,
-				loader: BlockLoader,
+				element: (
+					<Suspense fallback={<LoadingView />}>
+						<ViewBlockPage />
+					</Suspense>
+				),
+				loader: ViewBlockPageLoader,
+			},
+			{
+				path: "about",
+				element: (
+					<Suspense fallback={<LoadingView />}>
+						<AboutPage />
+					</Suspense>
+				),
 			},
 		],
 	},
 ]);
+
+const AppRouter = () => {
+	return <RouterProvider router={router} />;
+};
 
 export default AppRouter;

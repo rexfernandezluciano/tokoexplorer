@@ -3,7 +3,7 @@
 import { Outlet, useNavigation } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 
-import Navigation from "./components/Navigation";
+import Navigation from "./components/navs/Navigation";
 import Layout from "./components/Layout";
 import SearchBar from "./components/SearchBar";
 
@@ -20,11 +20,11 @@ export default function RootLayout() {
 						<Spinner
 							animation="border"
 							size="lg"
-							className="text-primary"
+							variant="primary"
 						/>
 					</div>
 				) : (
-					<Outlet />
+						<Outlet />
 				)}
 			</Layout>
 		</>

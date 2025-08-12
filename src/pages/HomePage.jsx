@@ -1,52 +1,20 @@
 /** @format */
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { Card, Badge, Placeholder, Nav, Row, Col, Container, ListGroup } from "react-bootstrap";
+import { Card, Badge, Placeholder, Nav, Row, Col, ListGroup } from "react-bootstrap";
 
 import Header from "../components/Header";
 import { truncate } from "../utils/formatters";
 
-export default function HomePage() {
-	const { status, metrics, stats } = useLoaderData();
+const HomePage = () => {
+	const { metrics, stats, blocks, transactions, operations } = useLoaderData();
 	const [activeTab, setActiveTab] = useState("blocks");
-	const [data, setData] = useState(null);
 	const [loading] = useState(false);
-
-	useEffect(() => {
-		if (status === "success") {
-			setData(metrics);
-		}
-	}, [data, status, metrics]);
-
-	let p = 0;
-	const placeholderData = {
-		latestBlocks: Array(5).fill({
-			height: 12345,
-			hash: "0x4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f",
-			prevHash: "0x4a3b2c1d0e9f8a7b6c5d4e3f2a1b0c9d8e7f",
-			operations: 3,
-			timestamp: new Date().toISOString(),
-		}),
-		latestTransactions: Array(5).fill({
-			id: "0x8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d",
-			type: "transfer",
-			from: "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f",
-			to: "0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d",
-			amount: 42.5,
-			timestamp: new Date().toISOString(),
-		}),
-		latestOperations: Array(5).fill({
-			id: p++,
-			type: "batch",
-			transactions: 2,
-			blockHeight: 12344,
-			timestamp: new Date().toISOString(),
-		}),
-	};
 
 	const dataFields = {
 		blocks: [
-			{ key: "height", label: "Height" },
+			{ key: "number", label: "Height" },
 			{ key: "prevHash", label: "Prev. Hash", truncate: { desktop: 15, mobile: 8 } },
 			{ key: "operations", label: "Operations" },
 			{ key: "timestamp", label: "Timestamp" },
@@ -54,84 +22,98 @@ export default function HomePage() {
 		transactions: [
 			{ key: "id", label: "ID", truncate: { desktop: 15, mobile: 8 } },
 			{ key: "type", label: "Type", badge: { variant: "info" } },
-			{ key: "from", label: "Account", truncate: { desktop: 10, mobile: 6 } },
+			{ key: "from", label: "From", truncate: { desktop: 10, mobile: 6 } },
 			{ key: "timestamp", label: "Timestamp" },
 		],
 		operations: [
-			{ key: "id", label: "ID" },
-			{ key: "blockHeight", label: "Block" },
+			{ key: "blockNumber", label: "Block" },
 			{ key: "type", label: "Type", badge: { variant: "primary" } },
 			{ key: "transactions", label: "Transactions" },
 		],
 	};
 
 	const renderDataList = (items, fields) => {
+		if (!items?.length) {
+			return <div className="text-muted">No data available</div>;
+		}
+
 		return (
-			<>
-				<div className="w-100">
-					<Row className="d-flex align-items-center justify-content-between mb-2">
-						{fields.map(i => (
-							<Col
-								key={i.label}
-								xs={6}
-								md={3}
-								className="text-truncate">
-								{i.label}
-							</Col>
-						))}
-					</Row>
-					<div>
-						<ListGroup
-							variant="flush"
-							className="w-100">
-							{items.map((item, index) => (
-								<ListGroup.Item
-									key={index}
-									className="py-3 px-0 w-100">
-									<Row>
-										{fields.map(field => (
-											<Col
-												key={field.key}
-												xs={6}
-												md={3}
-												className="text-truncate">
-												{field.badge ? (
-													<Badge bg={field.badge.variant}>{item[field.key]}</Badge>
-												) : field.truncate ? (
-													<>
-														<span className="d-none d-md-inline">{truncate(item[field.key], field.truncate.desktop)}</span>
-														<span className="d-inline d-md-none">{truncate(item[field.key], field.truncate.mobile)}</span>
-													</>
-												) : (
-													item[field.key]
-												)}
-											</Col>
-										))}
-									</Row>
-								</ListGroup.Item>
-							))}
-						</ListGroup>
-					</div>
-				</div>
-			</>
+			<div className="w-100">
+				{/* Desktop headers */}
+				<Row className="d-none d-md-flex fw-bold border-bottom pb-2 mb-2">
+					{fields.map(i => (
+						<Col
+							key={i.label}
+							md={3}
+							className="text-truncate">
+							{i.label}
+						</Col>
+					))}
+				</Row>
+
+				{/* Rows */}
+				<ListGroup
+					variant="flush"
+					className="w-100">
+					{items.map((item, index) => (
+						<ListGroup.Item
+							key={index}
+							className="py-3 px-0 w-100">
+							{/* Mobile card style */}
+							<div className="d-md-none">
+								<Card className="mb-2">
+									<Card.Body className="p-2">
+										{fields.map((field, fIndex) => {
+											let value = item[field.key];
+											if (Array.isArray(value)) value = value.length;
+
+											return (
+												<div
+													key={fIndex}
+													className="mb-2">
+													<small className="text-muted">{field.label}</small>
+													<div>{field.badge ? <Badge bg={field.badge.variant}>{value}</Badge> : field.truncate ? truncate(value, field.truncate.mobile) : value}</div>
+												</div>
+											);
+										})}
+									</Card.Body>
+								</Card>
+							</div>
+
+							{/* Desktop row style */}
+							<Row className="d-none d-md-flex">
+								{fields.map(field => {
+									let value = item[field.key];
+									if (Array.isArray(value)) value = value.length;
+
+									return (
+										<Col
+											key={field.key}
+											md={3}
+											className="text-truncate">
+											{field.badge ? <Badge bg={field.badge.variant}>{value}</Badge> : field.truncate ? truncate(value, field.truncate.desktop) : value}
+										</Col>
+									);
+								})}
+							</Row>
+						</ListGroup.Item>
+					))}
+				</ListGroup>
+			</div>
 		);
 	};
 
 	return (
-		<Container
-			fluid
-			className="px-0">
+		<div>
 			{/* Metrics Grid */}
-			{data && (
+			{metrics && (
 				<Card className="mb-4">
 					<Card.Body>
-						<div className="ms-sm-auto">
-							<Header
-								type="h3"
-								className="text-primary mb-3">
-								Mainnet Metrics
-							</Header>
-						</div>
+						<Header
+							type="h3"
+							className="text-primary mb-3">
+							Mainnet Metrics
+						</Header>
 						<Row>
 							{[
 								{ label: "Circulating Supply", value: metrics?.circulatingSupply },
@@ -143,7 +125,7 @@ export default function HomePage() {
 									key={i}
 									xs={6}
 									md={3}
-									className="mb-3 mb-md-0">
+									className="mb-3">
 									<div className="d-flex flex-column">
 										<small className="text-muted">{metric.label}</small>
 										<span className="fw-bold">{metric.value?.toLocaleString() || "N/A"}</span>
@@ -151,13 +133,12 @@ export default function HomePage() {
 								</Col>
 							))}
 						</Row>
-						<div className="ms-sm-auto">
-							<Header
-								type="h3"
-								className="text-primary mt-3 mb-3">
-								Overall Fees
-							</Header>
-						</div>
+
+						<Header
+							type="h3"
+							className="text-primary mt-3 mb-3">
+							Overall Fees
+						</Header>
 						<Row>
 							{[
 								{ label: "Total Fees", value: stats?.totalFees },
@@ -169,7 +150,7 @@ export default function HomePage() {
 									key={i}
 									xs={6}
 									md={3}
-									className="mb-3 mb-md-0">
+									className="mb-3">
 									<div className="d-flex flex-column">
 										<small className="text-muted">{stat.label}</small>
 										<span className="fw-bold">{stat.value?.toLocaleString() || "N/A"}</span>
@@ -219,7 +200,7 @@ export default function HomePage() {
 										className="mb-3">
 										Recent Blocks
 									</Header>
-									{renderDataList(placeholderData.latestBlocks, dataFields.blocks)}
+									{renderDataList(blocks, dataFields.blocks)}
 								</>
 							)}
 
@@ -230,7 +211,7 @@ export default function HomePage() {
 										className="mb-3">
 										Recent Transactions
 									</Header>
-									{renderDataList(placeholderData.latestTransactions, dataFields.transactions)}
+									{renderDataList(transactions, dataFields.transactions)}
 								</>
 							)}
 
@@ -241,13 +222,15 @@ export default function HomePage() {
 										className="mb-3">
 										Recent Operations
 									</Header>
-									{renderDataList(placeholderData.latestOperations, dataFields.operations)}
+									{renderDataList(operations, dataFields.operations)}
 								</>
 							)}
 						</>
 					)}
 				</Card.Body>
 			</Card>
-		</Container>
+		</div>
 	);
-}
+};
+
+export default HomePage;
